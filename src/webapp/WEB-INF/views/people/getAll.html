@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .list {
+            max-width: 1280px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .list-item p {
+            margin: 0;
+            order: 1; /* Никнеймы справа */
+        }
+
+        .list-item a {
+            text-decoration: none;
+            order: 2; /* Ссылки слева */
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            border-radius: 5px;"
+        }
+
+        .list-item a:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>User Management</h1> <!-- Заголовок сайта -->
+</header>
+<div class="list">
+    <th:block th:each="user : ${people}">
+        <div class="list-item">
+            <a th:href="@{/people/detail(nickName=${user.nickName})}">Detail</a>
+            <p th:text="${user.getNickName()}">user</p>
+        </div>
+    </th:block>
+</div>
+<script>
+
+</script>
+</body>
+</html>

@@ -4,10 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class ExitController {
+public class HelloController {
 
-    @GetMapping("/exit")
-    public String exit() {
-        return "exit/exit";
+    @GetMapping(value = "/")
+    public String hello() {
+        return "hello";
     }
+
 }

@@ -12,18 +12,15 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@ComponentScan("app")
 @EnableWebMvc
-@PropertySource("classpath:db.properties")
-public class SpringWebConfig implements WebMvcConfigurer {
+@ComponentScan(value = "app")
+public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
-    private final Environment env;
 
     @Autowired
-    public SpringWebConfig(ApplicationContext applicationContext, Environment environment) {
+    public WebConfig(ApplicationContext applicationContext, Environment environment) {
         this.applicationContext = applicationContext;
-        this.env = environment;
     }
 
     @Bean
@@ -48,6 +45,4 @@ public class SpringWebConfig implements WebMvcConfigurer {
         viewResolver.setTemplateEngine(templateEngine());
         registry.viewResolver(viewResolver);
     }
-
-
 }
