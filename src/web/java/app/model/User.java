@@ -19,16 +19,21 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "age", nullable = false)
-    private Byte age;
+    @Column(name = "phone_number", nullable = false, unique = true)
+    private String phoneNumber;
+
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
     public User() {
     }
 
-    public User(String name, String lastName, Byte age) {
+    public User(String nickName, String name, String lastName, String phoneNumber, String email) {
+        this.nickName = nickName;
         this.name = name;
         this.lastName = lastName;
-        this.age = age;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
     }
 
     public String getNickName() {
@@ -36,7 +41,7 @@ public class User {
     }
 
     public void setNickName(String nickName) {
-        this.nickName = this.nickName;
+        this.nickName = nickName;
     }
 
     public String getName() {
@@ -55,21 +60,30 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Byte getAge() {
-        return age;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setAge(Byte age) {
-        this.age = age;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "nickname=" + nickName +
+                "nickName='" + nickName + '\'' +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", age=" + age +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

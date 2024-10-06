@@ -86,6 +86,6 @@
         </configuration>
       </plugin>
     </plugins>
-    <finalName>Spring_MVC</finalName>
+    <finalName>Task_Manager</finalName>
   </build>
 </project>
