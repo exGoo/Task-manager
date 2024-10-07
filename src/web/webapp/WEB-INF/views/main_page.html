@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>All Users</title>
+    <title>Start page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,47 +23,30 @@
             max-width: 1280px;
             width: 100%;
             margin: 20px auto;
-            padding: 0 20px;
-        }
-        .list-item {
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
             border-bottom: 1px solid #e9ecef;
         }
-        .list-item p {
-            margin: 0;
-            order: 1; /* Никнеймы справа */
-        }
-        .list-item a {
-            text-decoration: none;
-            order: 2; /* Ссылки слева */
+        a {
+            display: inline-block;
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
             text-align: center;
-            border-radius: 5px;"
-        }
-        .list-item a:hover {
             text-decoration: none;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>User Management</h1> <!-- Заголовок сайта -->
+        <h2>Task manager</h2>
     </header>
     <div class="list">
-        <th:block th:each="user : ${people}">
-            <div class="list-item">
-                <p th:text="${user.getNickName()}">user</p>
-                <a th:href="@{/people/detail(nickName=${user.nickName})}">Detail</a>
-            </div>
-        </th:block>
+        <p>This is the beginning of a future pet project, the purpose of which is to study the material covered.</p>
+        <a href="http://localhost:8080/uManager">Check list of user</a>
     </div>
-<script>
-
-</script>
 </body>
 </html>

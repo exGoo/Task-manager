@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.5;
+            color: #24292e;
+            background-color: #f6f8fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #24292e;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .list {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(27,31,35,0.12);
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        .list-item p {
+            margin: 0;
+            font-weight: 600;
+            flex: 1;
+        }
+        .list-item .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .list-item a {
+            display: inline-block;
+            padding: 0.3rem 0.5rem;
+            color: white;
+            background-color: #0366d6;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+        }
+        .list-item a.delete {
+            background-color: darkred;
+        }
+        .list-item a.delete:hover {
+            background-color: #670101;
+        }
+        .list-item a:hover {
+            background-color: #0356b6;
+        }
+        .add {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .add a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            color: white;
+            background-color: #28a745;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .add a:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>User Management</h1> <!-- Заголовок сайта -->
+</header>
+<div class="list">
+    <th:block th:each="user : ${users}">
+        <div class="list-item">
+            <p th:text="${user.getNickName()}">user</p>
+            <div class="actions">
+                <a th:href="@{/uManager/user(nickname=${user.nickName})}">detail</a>
+                <a th:href="@{/uManager/update}">update</a>
+                <a th:href="@{/uManager/delete}" class="delete">delete</a>
+            </div>
+        </div>
+    </th:block>
+</div>
+<div class="add">
+    <a href="http://localhost:8080/uManager/new">add new user</a>
+</div>
+</body>
+</html>

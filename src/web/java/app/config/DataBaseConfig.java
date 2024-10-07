@@ -6,17 +6,24 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.jta.JtaTransactionManager;
 
 import javax.sql.DataSource;
+import javax.transaction.TransactionManager;
 import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
 @ComponentScan("app")
 @PropertySource("classpath:db.properties")
+@EnableTransactionManagement
 public class DataBaseConfig {
 
     private final Environment env;
@@ -48,6 +55,14 @@ public class DataBaseConfig {
         hiberProp.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         em.setJpaProperties(hiberProp);
         em.setPackagesToScan(env.getProperty("db.entity_package"));
+
         return em;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        JpaTransactionManager tm = new JpaTransactionManager();
+        tm.setEntityManagerFactory(entityManagerFactory().getObject());
+        return tm;
     }
 }
