@@ -94,11 +94,11 @@
 </header>
 <form th:method="POST" th:action="@{/uManager/save}" th:object="${user}">
     <label for="nickname">Nickname: </label>
-    <input type="text" id="nickname" th:field="*{nickName}">
+    <input type="text" id="nickname" th:field="*{nickname}">
     <label for="name">Name: </label>
     <input type="text" id="name" th:field="*{name}">
     <label for="lastname">Lastname: </label>
-    <input type="text" id="lastname" th:field="*{lastName}">
+    <input type="text" id="lastname" th:field="*{lastname}">
     <label for="phone">Phone number: </label>
     <input type="text" id="phone" th:field="*{phoneNumber}">
     <label for="email">Email: </label>

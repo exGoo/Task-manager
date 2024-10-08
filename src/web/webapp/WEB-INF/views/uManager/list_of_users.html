@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>All Users</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.5;
-            color: #24292e;
+            font-family: Arial, sans-serif;
             background-color: #f6f8fa;
+            color: #24292e;
             margin: 0;
             padding: 0;
         }
@@ -18,88 +17,110 @@
             padding: 1rem;
             text-align: center;
         }
-        .list {
-            max-width: 800px;
+        h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .container {
+            width: 35%;
             margin: 2rem auto;
-            background: white;
-            border: 1px solid #e1e4e8;
+            background-color: white;
+            padding: 2rem;
             border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(27,31,35,0.12);
+            box-shadow: 0 1px 3px rgba(27,31,35,0.12), 0 8px 24px rgba(27,31,35,0.12);
         }
-        .list-item {
+        .user-card {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 1rem;
+            align-items: center;
             border-bottom: 1px solid #e1e4e8;
+            padding: 1rem 0;
         }
-        .list-item:last-child {
+        .user-card:last-child {
             border-bottom: none;
         }
-        .list-item p {
+        .user-card p {
             margin: 0;
+            font-size: 1rem;
             font-weight: 600;
-            flex: 1;
         }
-        .list-item .actions {
+        .user-card div {
             display: flex;
-            gap: 0.5rem;
+            align-items: center;
         }
-        .list-item a {
-            display: inline-block;
-            padding: 0.3rem 0.5rem;
-            color: white;
-            background-color: #0366d6;
-            border-radius: 6px;
+        .user-card a {
             text-decoration: none;
-            font-weight: 600;
-            text-align: center;
+            margin-right: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: white;
         }
-        .list-item a.delete {
-            background-color: darkred;
+        .user-card a.detail-button {
+            background-color: #0366d6;
         }
-        .list-item a.delete:hover {
-            background-color: #670101;
-        }
-        .list-item a:hover {
+        .user-card a.detail-button:hover {
             background-color: #0356b6;
         }
-        .add {
-            text-align: center;
-            margin: 2rem 0;
+        .user-card a.update-button {
+            background-color: #f39c12;
         }
-        .add a {
-            display: inline-block;
-            padding: 0.5rem 1rem;
+        .user-card a.update-button:hover {
+            background-color: #e38c10;
+        }
+        form {
+            display: inline;
+        }
+        input[type="submit"] {
+            background-color: #d73a49;
             color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        input[type="submit"]:hover {
+            background-color: #c9303e;
+        }
+        .add-user {
+            display: block;
+            margin: 4rem auto;
+            text-align: center;
+        }
+        .add-user a {
             background-color: #28a745;
+            color: white;
+            padding: 0.75rem 1.5rem;
             border-radius: 6px;
             text-decoration: none;
-            font-weight: 600;
+            font-size: 1rem;
         }
-        .add a:hover {
+        .add-user a:hover {
             background-color: #218838;
         }
     </style>
 </head>
 <body>
 <header>
-    <h1>User Management</h1> <!-- Заголовок сайта -->
+    <h1>User Management</h1>
 </header>
-<div class="list">
+<div class="container">
     <th:block th:each="user : ${users}">
-        <div class="list-item">
-            <p th:text="${user.getNickName()}">user</p>
-            <div class="actions">
-                <a th:href="@{/uManager/user(nickname=${user.nickName})}">detail</a>
-                <a th:href="@{/uManager/update}">update</a>
-                <a th:href="@{/uManager/delete}" class="delete">delete</a>
+        <div class="user-card">
+            <p th:text="${user.getNickname()}">user</p>
+            <div>
+                <a th:href="@{/uManager/user(nickname=${user.getNickname()})}" class="detail-button">detail</a>
+                <a th:href="@{/uManager/edit(nickname=${user.getNickname()})}" class="update-button">update</a>
+                <form method="post" th:action="@{/uManager/delete(nickname=${user.getNickname()})}">
+                    <input type="submit" value="delete"/>
+                </form>
             </div>
         </div>
     </th:block>
-</div>
-<div class="add">
-    <a href="http://localhost:8080/uManager/new">add new user</a>
+    <div class="add-user">
+        <a href="http://localhost:8080/uManager/new">add new user</a>
+    </div>
 </div>
 </body>
 </html>

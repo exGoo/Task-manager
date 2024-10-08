@@ -2,13 +2,11 @@ package app.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
@@ -22,77 +20,41 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    @Transactional
-    public User get(String nickName) {
-        return emf.createEntityManager().find(User.class, nickName);
-    }
-
-    @Override
-    @Transactional
-    public void persist(User user) {
+    public void add(User user) {
         EntityManager em = emf.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.persist(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        } finally {
-            em.close();
-        }
+        em.getTransaction().begin();
+        em.persist(user);
+        em.getTransaction().commit();
     }
 
     @Override
-    @Transactional
+    public User get(String nickname) {
+        return emf.createEntityManager().find(User.class, nickname);
+    }
+
+    @Override
     public void update(User user) {
         EntityManager em = emf.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.merge(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        } finally {
-            em.close();
-        }
+        em.getTransaction().begin();
+        em.merge(user);
+        em.getTransaction().commit();
     }
 
     @Override
-    @Transactional
-    public void remove(User user) {
+    public void remove(String nickname) {
         EntityManager em = emf.createEntityManager();
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            em.remove(em.contains(user) ? user : em.merge(user));
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw e;
-        } finally {
-            em.close();
+        em.getTransaction().begin();
+        User user = em.find(User.class, nickname);
+        if (user != null) {
+            em.remove(user);
         }
+        em.getTransaction().commit();
     }
 
     @Override
-    @Transactional
     public List<User> getAll() {
         EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<User> query = em.createQuery("from User", User.class);
-            return query.getResultList();
-        } finally {
-            em.close();
-        }
+        TypedQuery<User> query = em.createQuery("from User", User.class);
+        return query.getResultList();
     }
 }

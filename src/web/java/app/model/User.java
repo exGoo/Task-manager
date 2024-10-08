@@ -6,18 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "people")
+@Table(name = "users")
 public class User {
 
     @Id
-    @Column(name = "nick_name", nullable = false, unique = true)
-    private String nickName;
+    @Column(name = "nickname", nullable = false, unique = true)
+    private String nickname;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "lastname", nullable = false)
+    private String lastname;
 
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
@@ -28,20 +28,20 @@ public class User {
     public User() {
     }
 
-    public User(String nickName, String name, String lastName, String phoneNumber, String email) {
-        this.nickName = nickName;
+    public User(String nickname, String name, String lastname, String phoneNumber, String email) {
+        this.nickname = nickname;
         this.name = name;
-        this.lastName = lastName;
+        this.lastname = lastname;
         this.phoneNumber = phoneNumber;
         this.email = email;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickName) {
+        this.nickname = nickName;
     }
 
     public String getName() {
@@ -52,12 +52,12 @@ public class User {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastName) {
+        this.lastname = lastName;
     }
 
     public String getPhoneNumber() {
@@ -79,9 +79,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "nickName='" + nickName + '\'' +
+                "nickName='" + nickname + '\'' +
                 ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", lastName='" + lastname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 '}';

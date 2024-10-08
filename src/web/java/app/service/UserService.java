@@ -1,10 +1,9 @@
-package app.dao;
+package app.service;
 
 import app.model.User;
-
 import java.util.List;
 
-public interface UserDao {
+public interface UserService {
 
     User get(String nickName);
 

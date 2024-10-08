@@ -3,7 +3,6 @@ package app.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
-import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -19,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
 
     @Autowired
-    public WebConfig(ApplicationContext applicationContext, Environment environment) {
+    public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
@@ -46,3 +45,4 @@ public class WebConfig implements WebMvcConfigurer {
         registry.viewResolver(viewResolver);
     }
 }
+

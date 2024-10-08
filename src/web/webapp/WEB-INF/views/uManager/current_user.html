@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>User</title>
@@ -72,12 +72,12 @@
         <button>Back</button>
     </a>
     <h1>
-        <span th:text="${user.getNickName()}">nick</span>
+        <span th:text="${user.getNickname()}">nick</span>
     </h1>
 </header>
 <div class="userInfo">
     <h2>Name: <span th:text="${user.getName()}">Name</span></h2>
-    <h2>Lastname: <span th:text="${user.getLastName()}">Lastname</span></h2>
+    <h2>Lastname: <span th:text="${user.getLastname()}">Lastname</span></h2>
     <h2>Phone: <span th:text="${user.getPhoneNumber()}">Phone</span></h2>
     <h2>Email: <span th:text="${user.getEmail()}">Email</span></h2>
 </div>
